@@ -34,20 +34,21 @@ def job_retweet():
 
 # schedule.every().day.at("15:00").do(job_retweet)
 
-# schedule tweet
+# Dictionary of dates and tweets
 tweet_dict = {
-    # fill your tweets here
-    # 'day1': 'Hello, Twitter!',
-    # 'day2': 'Another day, another tweet.',
-    # ...
+    '22-Jun-23': 'Thinking about scaling vs growth. Growth is not always scaling, but scaling always involves growth. A company can grow but may not necessarily scale. #growth #scaling',
+    '23-Jun-23': 'The power of technology is limitless, but it is the human mind that wields it. Tech without the right thought leadership is just a tool without a hand. #technology #AI',
+    # ... Fill in the rest of your tweets here ...
 }
 
+# Function to post tweet based on the date
 def job_tweet():
-    today = time.strftime('%A').lower()  # get today's day of week
+    today = time.strftime('%d-%b-%y')  # get today's date
     tweet_text = tweet_dict.get(today)
     if tweet_text:
         create_tweet(consumer_key, consumer_secret, access_token, access_token_secret, tweet_text)
 
+# Schedule job to run every day at 12:00
 schedule.every().day.at("12:00").do(job_tweet)
 
 # schedule like tweets
